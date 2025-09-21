@@ -15,9 +15,4 @@ class UserRegister(CreateView):
         form.instance.password = make_password(form.instance.password)
         return super().form_valid(form)
     
-class LoginUser(LoginView):
-    template_name='login.html'
-    redirect_authentication_form=True
-    success_url=reverse_lazy("home")
-
 
