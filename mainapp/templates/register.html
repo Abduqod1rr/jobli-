@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f6fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .register-container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+      width: 350px;
+    }
+    .register-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2d3436;
+    }
+    .register-container form {
+      display: flex;
+      flex-direction: column;
+    }
+    .register-container label {
+      margin-bottom: 5px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .register-container input,
+    .register-container select {
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #b2bec3;
+      font-size: 14px;
+    }
+    .register-container button {
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #0984e3;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .register-container button:hover {
+      background: #74b9ff;
+    }
+    .login-link {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+    .login-link a {
+      color: #0984e3;
+      text-decoration: none;
+    }
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <h2>Register</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Sign Up</button>
+    </form>
+    <div class="login-link">
+      Already have an account? <a href="{% url 'login' %}">Login</a>
+    </div>
+  </div>
+</body>
+</html>
