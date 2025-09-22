@@ -1,3 +1,4 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import render ,HttpResponse
 from django.views.generic import ListView ,CreateView ,UpdateView , DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin ,UserPassesTestMixin
@@ -18,7 +19,7 @@ class HomeView(LoginRequiredMixin,ListView):
 class AddJobView(LoginRequiredMixin,CreateView):
     model=Job
     fields=['title','about']
-    template_name='job_add.html'
+    template_name='add_job.html'
     success_url=reverse_lazy('home')
 
     def form_valid(self, form):
@@ -42,7 +43,5 @@ class ReadApply(LoginRequiredMixin, ListView,UserPassesTestMixin):
     template_name='applies.html'
     context_object_name='apply'
     
-    def test_func(self ,form):
-        
-        if Apply.objects.filter(user=self.request.user):
-            return True
+    def get_queryset(self) :
+        return Apply.objects.filter(job__owner=self.request.user)

@@ -42,6 +42,13 @@
         .apply-card strong {
             color: #2a7ae4;
         }
+
+        .no-access {
+            text-align: center;
+            margin-top: 50px;
+            color: #a00;
+            font-size: 1.2rem;
+        }
     </style>
 </head>
 <body>
@@ -49,17 +56,21 @@
     <div class="apply-container">
         <h1 class="apply-title">Applicants</h1>
 
-        <ul class="apply-list">
-            {% for app in apply %}
-            <li class="apply-card">
-                <p><strong>Job:</strong> {{ app.job.title }}</p>
-                <p><strong>Applicant:</strong> {{ app.user.username }}</p>
-                <p><strong>Applied At:</strong> {{ app.applied_at }}</p>
-            </li>
-            {% empty %}
-            <p>No one has applied yet.</p>
-            {% endfor %}
-        </ul>
+        {% if apply %}
+            <ul class="apply-list">
+                {% for app in apply %}
+                    {% if request.user == app.job.owner %}
+                    <li class="apply-card">
+                        <p><strong>Job:</strong> {{ app.job.title }}</p>
+                        <p><strong>Applicant:</strong> {{ app.user.username }}</p>
+                        <p><strong>Applied At:</strong> {{ app.applied_at }}</p>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-access">No one has applied yet.</p>
+        {% endif %}
     </div>
     {% endblock %}
 </body>

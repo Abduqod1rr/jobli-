@@ -106,6 +106,8 @@
                     <button type="submit" class="apply-btn">Apply</button>
                 </form>
             </li>
+            {% empty %}
+            <p>No jobs yet.</p>
             {% endfor %}
         </ul>
     </div>
