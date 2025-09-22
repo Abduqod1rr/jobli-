@@ -3,13 +3,26 @@
     <h1 class="job-title">Job List</h1>
 
     <!-- Search form -->
-    <form method="get" action="{% url 'home' %}" style="margin-bottom:20px; text-align:center;">
-        <input type="text" name="q" placeholder="Search jobs..." value="{{ request.GET.q }}"
-               style="padding:8px; width:60%; border:1px solid #ccc; border-radius:6px;">
-        <button type="submit" style="padding:8px 16px; background:#2a7ae4; color:#fff; border:none; border-radius:6px; cursor:pointer;">
-            Search
-        </button>
-    </form>
+    <form method="get" action="">
+    <input type="text" name="q" placeholder="Search jobs..." value="{{ request.GET.q }}">
+    <button type="submit">Search</button>
+</form>
+
+<ul class="job-list">
+    {% for job in jobs %}
+        <li class="job-card">
+            <h3>{{ job.title }}</h3>
+            <p>{{ job.description }}</p>
+            <div class="job-meta">
+                <span>Location:</span> {{ job.location }} <br>
+                <span>Salary:</span> {{ job.salary }}
+            </div>
+        </li>
+    {% empty %}
+        <p>No jobs found.</p>
+    {% endfor %}
+</ul>
+
 
     <ul class="job-list">
         {% for job in jobs %}

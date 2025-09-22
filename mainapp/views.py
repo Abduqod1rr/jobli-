@@ -19,6 +19,9 @@ class HomeView(LoginRequiredMixin,ListView):
         if query:
             return Job.objects.filter(title__icontains=query)
         return Job.objects.all()
+    
+    def get_queryset(self):
+        return self.search
 
 
 
