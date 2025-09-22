@@ -6,67 +6,85 @@
     <link rel="stylesheet" href="styles-practic.css">
     <title>Practic</title>
     <style>
-           /* Container */
-.job-container {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 20px;
-}
+        /* Container */
+        .job-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
 
-/* Title */
-.job-title {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2rem;
-    color: #333;
-    font-weight: bold;
-}
+        /* Title */
+        .job-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: #333;
+            font-weight: bold;
+        }
 
-/* List */
-.job-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+        /* List */
+        .job-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
 
-/* Each job card */
-.job-card {
-    background: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-    transition: transform 0.7s ease, box-shadow 0.7s ease;
-}
+        /* Each job card */
+        .job-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            transition: transform 0.7s ease, box-shadow 0.7s ease;
+        }
 
-/* Hover effect */
-.job-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-}
+        /* Hover effect */
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
 
-/* Texts */
-.job-card h3 {
-    margin-top: 0;
-    color: #2a7ae4;
-    font-size: 1.4rem;
-}
+        /* Texts */
+        .job-card h3 {
+            margin-top: 0;
+            color: #2a7ae4;
+            font-size: 1.4rem;
+        }
 
-.job-card p {
-    margin: 10px 0;
-    color: #555;
-    line-height: 1.5;
-}
+        .job-card p {
+            margin: 10px 0;
+            color: #555;
+            line-height: 1.5;
+        }
 
-.job-card .job-meta {
-    font-size: 0.9rem;
-    color: #777;
-}
-.job-card .job-meta span {
-    font-weight: 500;
-    color: #333;
-}
-   </style>
+        .job-card .job-meta {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        .job-card .job-meta span {
+            font-weight: 500;
+            color: #333;
+        }
+
+        /* Apply button */
+        .apply-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #2a7ae4;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-decoration: none;
+        }
+        .apply-btn:hover {
+            background: #1d5dbf;
+        }
+    </style>
 </head>
 <body>
     {% block content %}
@@ -81,6 +99,12 @@
                 <p class="job-meta">
                     Posted by: <span>{{ job.owner.username }}</span> | <span>{{ job.posted_at }}</span>
                 </p>
+
+                <!-- Apply button -->
+                <form action="{% url 'apply' job.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="apply-btn">Apply</button>
+                </form>
             </li>
             {% endfor %}
         </ul>

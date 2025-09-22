@@ -17,4 +17,4 @@ class Apply(models.Model):
     applied_at=models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.user
+        return self.job

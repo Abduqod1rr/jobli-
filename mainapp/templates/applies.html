@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applies</title>
+    <style>
+        .apply-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .apply-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .apply-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .apply-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+        }
+
+        .apply-card p {
+            margin: 5px 0;
+            color: #444;
+            line-height: 1.4;
+        }
+
+        .apply-card strong {
+            color: #2a7ae4;
+        }
+    </style>
+</head>
+<body>
+    {% block content %}
+    <div class="apply-container">
+        <h1 class="apply-title">Applicants</h1>
+
+        <ul class="apply-list">
+            {% for app in apply %}
+            <li class="apply-card">
+                <p><strong>Job:</strong> {{ app.job.title }}</p>
+                <p><strong>Applicant:</strong> {{ app.user.username }}</p>
+                <p><strong>Applied At:</strong> {{ app.applied_at }}</p>
+            </li>
+            {% empty %}
+            <p>No one has applied yet.</p>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endblock %}
+</body>
+</html>
