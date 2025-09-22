@@ -14,6 +14,12 @@ class HomeView(LoginRequiredMixin,ListView):
     template_name='home.html'
     context_object_name='jobs'
 
+    def search(self):
+        query=self.request.GET.get('q')
+        if query:
+            return Job.objects.filter(title__icontains=query)
+        return Job.objects.all()
+
 
 
 class AddJobView(LoginRequiredMixin,CreateView):
