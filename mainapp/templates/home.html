@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Job List</h1>
+
+    <ul>
+        {% for job in jobs %}
+        <li style="margin-bottom:20px; border:1px solid #ccc; padding:10px;">
+            <h3>{{ job.title }}</h3>
+            <p>{{ job.about }}</p>
+            <p><small>Posted by: {{ job.owner.username }} | {{ job.posted_at }}</small></p>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
