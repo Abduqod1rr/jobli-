@@ -6,7 +6,9 @@ from django.contrib.auth.views import LoginView
 
 
 urlpatterns = [
-    path('home/',views.home, name="home"),
+    path('home/',views.HomeView.as_view(), name="home"),
     path('register/',UserRegister.as_view(),name='register'),
-    path('login/',LoginView.as_view(template_name="login.html"),name="login")
+    path('login/',LoginView.as_view(template_name="login.html"),name="login"),
+    path('job_add/',views.AddJobView.as_view(),name='job_add'),
+    path('getaply/<int:pk>',views.GetApply.as_view(),name='get_apply')
 ]
