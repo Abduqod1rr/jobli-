@@ -32,6 +32,9 @@ class GetApply(LoginRequiredMixin,CreateView):
     template_name='home.html'
     fields=[]
     success_url=reverse_lazy('home')
+
+    class Meta:
+        unique_together=('job','user')
     
     def form_valid(self, form):
         form.instance.job_id=self.kwargs['pk']
