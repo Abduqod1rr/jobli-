@@ -8,20 +8,6 @@
     <button type="submit">Search</button>
 </form>
 
-<ul class="job-list">
-    {% for job in jobs %}
-        <li class="job-card">
-            <h3>{{ job.title }}</h3>
-            <p>{{ job.description }}</p>
-            <div class="job-meta">
-                <span>Location:</span> {{ job.location }} <br>
-                <span>Salary:</span> {{ job.salary }}
-            </div>
-        </li>
-    {% empty %}
-        <p>No jobs found.</p>
-    {% endfor %}
-</ul>
 
 
     <ul class="job-list">
