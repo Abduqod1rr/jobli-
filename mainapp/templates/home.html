@@ -7,9 +7,6 @@
     <input type="text" name="q" placeholder="Search jobs..." value="{{ request.GET.q }}">
     <button type="submit">Search</button>
 </form>
-
-
-
     <ul class="job-list">
         {% for job in jobs %}
         <li class="job-card">
