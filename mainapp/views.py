@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin ,UserPassesTestMixin
 from .models import Job , Apply
 from django.urls import reverse_lazy
 from users.models import CustomUser
+from typing import Optional, cast
 # Create your views here.
 def home(request):
     return HttpResponse("hello world")
@@ -22,8 +23,25 @@ class HomeView(LoginRequiredMixin,ListView):
     
     def get_queryset(self):
         return self.search()
+    
+class DeleteJob(LoginRequiredMixin , UserPassesTestMixin , DeleteView):
+    model = Job
+    success_url=reverse_lazy('home')
 
+    def test_func(self) :
+        job=cast(Job,self.get_object())
+        return job.owner == self.request.user
 
+class ViewMyJobs(LoginRequiredMixin,UserPassesTestMixin,ListView):
+    model=Job
+    template_name='myjobs.html'
+    context_object_name='jobs'
+
+    def get_queryset(self):
+        return Job.objects.filter(owner=self.request.user)
+   
+    def test_func(self) :
+        return self.request.user.is_authenticated
 
 class AddJobView(LoginRequiredMixin,CreateView):
     model=Job

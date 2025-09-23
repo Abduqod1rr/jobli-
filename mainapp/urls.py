@@ -12,5 +12,7 @@ urlpatterns = [
     path('job_add/',views.AddJobView.as_view(),name='job_add'),
     path('apply/<int:pk>/', views.GetApply.as_view(), name="apply"),
     path('applies',views.ReadApply.as_view(),name='appies'),
+    path("myjobs/", views.ViewMyJobs.as_view(), name="myjobs"),
+    path("job_delete/", views.DeleteJob.as_view(), name="job_delete")
 
 ]
