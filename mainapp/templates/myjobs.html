@@ -9,7 +9,8 @@
                 <p>{{ job.about }}</p>
                 <!-- Actions -->
                 <div style="margin-top:15px;">
-                    <a href="{% url 'job_delete' %}" class="btn-delete">🗑 Delete</a>
+                    <a href="{% url 'job_update' job.pk %}" class="btn-delete">update</a>
+                    <a href="{% url 'job_delete' job.pk %}" class="btn-delete">🗑 Delete</a>
                 </div>
             </li>
         {% empty %}

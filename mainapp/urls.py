@@ -13,6 +13,7 @@ urlpatterns = [
     path('apply/<int:pk>/', views.GetApply.as_view(), name="apply"),
     path('applies',views.ReadApply.as_view(),name='appies'),
     path("myjobs/", views.ViewMyJobs.as_view(), name="myjobs"),
-    path("job_delete/", views.DeleteJob.as_view(), name="job_delete")
+    path("job_delete/<int:pk>/", views.DeleteJob.as_view(), name="job_delete"),
+    path("job_update/<int:pk>", views.UpdateJob.as_view(), name="job_update")
 
 ]

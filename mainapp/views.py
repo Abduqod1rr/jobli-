@@ -23,14 +23,27 @@ class HomeView(LoginRequiredMixin,ListView):
     
     def get_queryset(self):
         return self.search()
-    
+
+#DELETE 
 class DeleteJob(LoginRequiredMixin , UserPassesTestMixin , DeleteView):
     model = Job
+    template_name='job_delete.html'
     success_url=reverse_lazy('home')
 
     def test_func(self) :
         job=cast(Job,self.get_object())
         return job.owner == self.request.user
+
+#UPDATE
+class UpdateJob(LoginRequiredMixin , UserPassesTestMixin ,UpdateView):
+    model = Job
+    
+    success_url=reverse_lazy('home')
+
+    def test_func(self) :
+        job = cast(Job,self.get_object())
+        return job.owner == self.request.user
+
 
 class ViewMyJobs(LoginRequiredMixin,UserPassesTestMixin,ListView):
     model=Job
