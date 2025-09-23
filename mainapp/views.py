@@ -21,7 +21,7 @@ class HomeView(LoginRequiredMixin,ListView):
         return Job.objects.all()
     
     def get_queryset(self):
-        return self.search
+        return self.search()
 
 
 
