@@ -6,6 +6,7 @@ from .models import Job , Apply
 from django.urls import reverse_lazy
 from users.models import CustomUser
 from typing import Optional, cast
+from django.contrib import messages
 # Create your views here.
 def home(request):
     return HttpResponse("hello world")
@@ -79,11 +80,16 @@ class GetApply(LoginRequiredMixin,CreateView):
     fields=[]
     success_url=reverse_lazy('home')
 
-    class Meta:
-        unique_together=('job','user')
     
     def form_valid(self, form):
-        form.instance.job_id=self.kwargs['pk']
+        job_id=self.kwargs['pk']
+        user=self.request.user
+
+        if Apply.objects.filter(job_id=job_id , user=user).exists():
+            messages.warning(self.request, "You already applied to this job.")
+            return self.form_invalid(form)
+        
+        form.instance.job_id = job_id
         form.instance.user=self.request.user
         return super().form_valid(form)
     
@@ -91,6 +97,9 @@ class ReadApply(LoginRequiredMixin, ListView,UserPassesTestMixin):
     model=Apply
     template_name='applies.html'
     context_object_name='apply'
-    
+
+    class Meta:
+        unique_together=('job','user')
+
     def get_queryset(self) :
         return Apply.objects.filter(job__owner=self.request.user)
