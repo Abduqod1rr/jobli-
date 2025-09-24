@@ -35,7 +35,7 @@ class DeleteJob(LoginRequiredMixin , UserPassesTestMixin , DeleteView):
         return job.owner == self.request.user
 
 #UPDATE
-class UpdateJob(LoginRequiredMixin , UserPassesTestMixin ,UpdateView):
+class UpdateJob(LoginRequiredMixin , UserPassesTestMixin ,UpdateView,CustomUser):
     model = Job
     
     success_url=reverse_lazy('home')
@@ -56,14 +56,20 @@ class ViewMyJobs(LoginRequiredMixin,UserPassesTestMixin,ListView):
     def test_func(self) :
         return self.request.user.is_authenticated
 
-class AddJobView(LoginRequiredMixin,CreateView):
+class AddJobView(LoginRequiredMixin,CreateView, UserPassesTestMixin ,CustomUser):
     model=Job
     fields=['title','about']
     template_name='add_job.html'
     success_url=reverse_lazy('home')
 
+    def test_func(self):
+        if not self.request.user.is_authenticated:
+            return False
+        user=cast(CustomUser,self.request.user)
+        return user.role=='Job owner' 
+
     def form_valid(self, form):
-        # ownerni avtomatik login bo‘lgan user qilib qo‘yish
+        
         form.instance.owner = self.request.user
         return super().form_valid(form)
     

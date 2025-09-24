@@ -4,9 +4,10 @@
 
     <!-- Search form -->
     <form method="get" action="">
-    <input type="text" name="q" placeholder="Search jobs..." value="{{ request.GET.q }}">
-    <button type="submit">Search</button>
-</form>
+        <input type="text" name="q" placeholder="Search jobs..." value="{{ request.GET.q }}">
+        <button type="submit">Search</button>
+    </form>
+
     <ul class="job-list">
         {% for job in jobs %}
         <li class="job-card">
@@ -15,6 +16,10 @@
             <p class="job-meta">
                 Posted by: <span>{{ job.owner.username }}</span> | <span>{{ job.posted_at }}</span>
             </p>
+            <form method="post" action="{% url 'apply' job.id %}">
+                {% csrf_token %}
+                <button type="submit" class="apply-btn">Apply</button>
+            </form>
         </li>
         {% empty %}
         <p>No jobs found.</p>
@@ -23,8 +28,8 @@
 </div>
 {% endblock %}
 
-   <style>
-           /* Container */
+<style>
+/* Container */
 .job-container {
     max-width: 900px;
     margin: 40px auto;
@@ -54,7 +59,7 @@
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-    transition: transform 2s ease, box-shadow 2s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 /* Hover effect */
@@ -84,4 +89,23 @@
     font-weight: 500;
     color: #333;
 }
-   </style>
+
+/* Apply button */
+.apply-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #2a7ae4;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.apply-btn:hover {
+    background: #1e5bbf;
+    transform: translateY(-2px);
+}
+</style>
