@@ -56,7 +56,7 @@ class ViewMyJobs(LoginRequiredMixin,UserPassesTestMixin,ListView):
     def test_func(self) :
         return self.request.user.is_authenticated
 
-class AddJobView(LoginRequiredMixin,CreateView, UserPassesTestMixin ,CustomUser):
+class AddJobView(LoginRequiredMixin, UserPassesTestMixin,CreateView ):
     model=Job
     fields=['title','about']
     template_name='add_job.html'
