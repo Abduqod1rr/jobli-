@@ -1,6 +1,73 @@
 
 {% block content %}
-<h2>Add Job</h2>
+<h2 style="text-align:center; font-family:Segoe UI, sans-serif; margin-bottom:20px;">Add Job</h2>
+
+<style>
+/* Umumiy form style */
+form {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Label va inputlar */
+form p {
+  margin-bottom: 18px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="email"],
+form textarea,
+form select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: 0.2s;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+  border-color: #2a7ae4;
+  box-shadow: 0 0 0 3px rgba(42,122,228,0.15);
+  outline: none;
+}
+
+/* Button */
+form button {
+  width: 100%;
+  padding: 12px;
+  background: #2a7ae4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s, transform 0.15s;
+}
+
+form button:hover {
+  background: #1e5bbf;
+  transform: translateY(-2px);
+}
+</style>
+
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
