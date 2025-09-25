@@ -58,20 +58,17 @@ class ViewMyJobs(LoginRequiredMixin,UserPassesTestMixin,ListView):
     def test_func(self) :
         return self.request.user.is_authenticated
 
-class AddJobView(LoginRequiredMixin, UserPassesTestMixin,CreateView ):
-    model=Job
-    fields=['title','about']
-    template_name='add_job.html'
-    success_url=reverse_lazy('home')
+class AddJobView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = Job
+    fields = ['title', 'about']
+    template_name = 'add_job.html'
+    success_url = reverse_lazy('home')
 
     def test_func(self):
-        if not self.request.user.is_authenticated:
-            return False
-        user=cast(CustomUser,self.request.user)
-        return user.role=='Job owner' 
+        user = cast(CustomUser, self.request.user)
+        return user.role.strip().lower() == "job owner"
 
     def form_valid(self, form):
-        
         form.instance.owner = self.request.user
         return super().form_valid(form)
     
