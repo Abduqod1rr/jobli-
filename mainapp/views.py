@@ -38,8 +38,9 @@ class DeleteJob(LoginRequiredMixin , UserPassesTestMixin , DeleteView):
 #UPDATE
 class UpdateJob(LoginRequiredMixin , UserPassesTestMixin ,UpdateView,CustomUser):
     model = Job
-    
+    fields=['title','about']
     success_url=reverse_lazy('home')
+    template_name='add_job.html'
 
     def test_func(self) :
         job = cast(Job,self.get_object())
