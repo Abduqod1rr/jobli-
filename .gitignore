@@ -11,16 +11,20 @@ __pycache__/
 env/
 venv/
 
-# Django stuff
+# Django
 *.log
 *.pot
 *.pyc
 db.sqlite3
 media/
 staticfiles/
-.gitignore
+local_settings.py
 
-# IDE
+# Migrations (ixtiyoriy, agar version control qilmasang)
+# */migrations/*.py
+# !*/migrations/__init__.py
+
+# IDE / Editor
 .vscode/
 .idea/
 *.swp
