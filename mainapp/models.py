@@ -6,6 +6,9 @@ class Job(models.Model):
     about=models.TextField()
     posted_at=models.DateTimeField(auto_now_add=True)
     owner=models.ForeignKey(CustomUser,on_delete=models.CASCADE)
+    
+    class Meta():
+        ordering=['-posted_at']
 
     def __str__(self):
         return f"{self.title} | {self.owner}"

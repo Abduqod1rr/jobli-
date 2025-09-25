@@ -75,7 +75,7 @@ class AddJobView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 class GetApply(LoginRequiredMixin,CreateView):
     model=Apply
     template_name='home.html'
-    fields=[]
+    fields=['letter']
     success_url=reverse_lazy('home')
 
     

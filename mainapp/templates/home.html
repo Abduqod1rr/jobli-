@@ -30,8 +30,25 @@
                 Posted by: <span>{{ job.owner.username }}</span> | <span>{{ job.posted_at }}</span>
             </p>
             <form method="post" action="{% url 'apply' job.id %}">
-                {% csrf_token %}
-                <button type="submit" class="apply-btn">Apply</button>
+  {% csrf_token %}
+
+  <label for="letter-{{ job.id }}">Your Cover Letter</label>
+  <textarea id="letter-{{ job.id }}" name="letter" rows="4" required
+            placeholder="Write why you’re a good fit..." 
+            style="width:100%; padding:10px; margin-top:10px; border-radius:6px; border:1px solid #ccc;"></textarea>
+
+  <button type="submit" class="apply-btn">Apply</button>
+</form>
+
+<!-- Messages -->
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
             </form>
         </li>
         {% empty %}
