@@ -25,7 +25,7 @@
         {% for job in jobs %}
         <li class="job-card">
             <h3>{{ job.title }}</h3>
-            <p>{{ job.about }}</p>
+            <p>about: {{ job.about }}</p>
             <p class="job-meta">
                 Posted by: <span>{{ job.owner.username }}</span> | <span>{{ job.posted_at }}</span>
             </p>
